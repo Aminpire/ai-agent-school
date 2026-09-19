@@ -1,58 +1,189 @@
-import { NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
+"use client";
 
-import { createSessionToken, getSessionUser } from "@/lib/auth";
-import { readStore } from "@/lib/data-store";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export async function POST(request: Request) {
-  const body = await request.json();
-  const email = String(body.email || "").trim().toLowerCase();
-  const password = String(body.password || "");
+import { agents, courses } from "@/lib/school-data";
 
-  if (!email || password.length < 6) {
-    return NextResponse.json({ error: "Valid email and password are required." }, { status: 400 });
-  }
+export default function HomePage() {
+  const [user, setUser] = useState<{ id: string; name: string; email: string; role: string } | null>(null);
 
-  const store = await readStore();
-  const user = store.users.find((entry) => entry.email.toLowerCase() === email);
+  useEffect(() => {
+    fetch("/api/auth/me")
+      .then(async (response) => {
+        if (!response.ok) return null;
+        const payload = await response.json();
+        return payload.user;
+      })
+      .then((payload) => setUser(payload))
+      .catch(() => setUser(null));
+  }, []);
 
-  if (!user) {
-    return NextResponse.json({ error: "Account not found. Please register first." }, { status: 401 });
-  }
+  return (
+    <main className="school-page">
+      <aside className="sidebar">
+        <div className="brand-block">
+          <div className="brand-mark">A</div>
+          <div>
+            <div className="brand-name">agent<span>school</span></div>
+          </div>
+        </div>
 
-  const validPassword = await bcrypt.compare(password, user.passwordHash);
-  if (!validPassword) {
-    return NextResponse.json({ error: "Incorrect password." }, { status: 401 });
-  }
+        <div className="side-label">WORLD SCHOOL</div>
 
-  const token = await createSessionToken({
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    role: user.role
-  });
+        <nav className="side-nav">
+          <Link href="/" className="nav-item active">Overview</Link>
+          <Link href="/courses" className="nav-item">Courses</Link>
+          <Link href="/exams" className="nav-item">Exams</Link>
+          <Link href="/agents" className="nav-item">Agents</Link>
+          <Link href="/certificates" className="nav-item">Certificates</Link>
+          <Link href="/admin" className="nav-item">Admin</Link>
+        </nav>
 
-  const response = NextResponse.json({
-    user: {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      role: user.role
-    }
-  });
+        <div className="side-cta">
+          <div className="spark">✦</div>
+          <strong>Build a new academy</strong>
+          <p>Create custom coaching tracks for specialized AI agents.</p>
+          <button>Open Academy Studio</button>
+        </div>
 
-  response.cookies.set("agent_school_session", token, {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 7
-  });
+        <div className="profile-card">
+          <div className="profile-avatar">{user ? user.name.slice(0, 2).toUpperCase() : "AM"}</div>
+          <div>
+            <strong>{user ? user.name : "Aminpire"}</strong>
+            <span>{user ? user.role : "Headmaster"}</span>
+          </div>
+        </div>
+      </aside>
 
-  return response;
-}
+      <section className="content-panel">
+        <header className="topbar">
+          <div className="topbar-title">Agent Academy</div>
+          <div className="topbar-actions">
+            <Link href="/login" className="top-login-link">Login</Link>
+            <Link href="/register" className="top-register-link">Register</Link>
+            <div className="tiny-avatar">AM</div>
+          </div>
+        </header>
 
-export async function GET() {
-  const session = await getSessionUser();
-  return NextResponse.json({ user: session ?? null });
+        <div className="page-shell">
+          <div className="hero-row">
+            <div>
+              <div className="eyebrow">SEPTEMBER 19, 2026</div>
+              <h1>Train your AI agents. Pass the exams. Earn your degree.</h1>
+              <p>
+                Welcome to the world of school where every autonomous learner gains skills,
+                proves mastery, and earns certificates for real-world performance.
+              </p>
+            </div>
+            <Link href="/exams" className="primary-btn">Take the next exam →</Link>
+          </div>
+
+          <div className="metrics-grid">
+            <div className="metric-card">
+              <div className="metric-label">OVERALL MASTERY</div>
+              <div className="metric-value">68<span>%</span></div>
+              <div className="metric-change positive">↗ 8% this month</div>
+            </div>
+            <div className="metric-card">
+              <div className="metric-label">CERTIFIED SKILLS</div>
+              <div className="metric-value">7<span>/12</span></div>
+              <div className="metric-change neutral">2 active tracks</div>
+            </div>
+            <div className="metric-card accent">
+              <div className="metric-label">NEXT MILESTONE</div>
+              <div className="milestone-title">Prompt Engineer</div>
+              <div className="milestone-row">
+                <span className="bar"><i /></span>
+                <b>3 / 4</b>
+              </div>
+              <button>View pathway</button>
+            </div>
+          </div>
+
+          <div className="section-head">
+            <div>
+              <h2>Continue learning</h2>
+              <p>Pick up where your agents left off.</p>
+            </div>
+            <Link href="/courses">View all courses →</Link>
+          </div>
+
+          <div className="course-grid">
+            {courses.map((course) => (
+              <article key={course.title} className="course-card">
+                <div className={`course-icon ${course.color}`}>{course.icon}</div>
+                <div className="course-meta">{course.level} · {course.lessons} lessons</div>
+                <h3>{course.title}</h3>
+                <p>{course.description}</p>
+                <div className="course-footer">
+                  <div className="mini-progress"><i style={{ width: `${course.progress}%` }} /></div>
+                  <span>{course.progress > 0 ? `${course.progress}% complete` : "Start course"}</span>
+                  <Link href="/courses">→</Link>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="lower-grid">
+            <section className="panel-box">
+              <div className="section-head compact">
+                <div>
+                  <h2>Agent roster</h2>
+                  <p>Current learners in the academy.</p>
+                </div>
+              </div>
+
+              {agents.map((agent) => (
+                <div key={agent.name} className="agent-row">
+                  <div className="agent-badge">{agent.name[0]}</div>
+                  <div className="agent-copy">
+                    <strong>{agent.name}</strong>
+                    <span>{agent.role}</span>
+                  </div>
+                  <div className="agent-score">{agent.score}%</div>
+                </div>
+              ))}
+            </section>
+
+            <section className="panel-box">
+              <div className="section-head compact">
+                <div>
+                  <h2>Recent activity</h2>
+                  <p>Your latest academy wins.</p>
+                </div>
+              </div>
+
+              <div className="activity-list">
+                <div className="activity-item">
+                  <span className="activity-icon green">✓</span>
+                  <div>
+                    <strong>Passed API Basics</strong>
+                    <span>Certification earned · Today</span>
+                  </div>
+                  <b>92%</b>
+                </div>
+                <div className="activity-item">
+                  <span className="activity-icon purple">✦</span>
+                  <div>
+                    <strong>Lesson completed</strong>
+                    <span>Planning with constraints · Yesterday</span>
+                  </div>
+                  <b>+120 XP</b>
+                </div>
+                <div className="activity-item">
+                  <span className="activity-icon orange">◎</span>
+                  <div>
+                    <strong>Skill unlocked</strong>
+                    <span>Structured outputs · Sep 16</span>
+                  </div>
+                  <b>Lv 3</b>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
 }
