@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "id": "admin-1",
+      "name": "Aminpire",
+      "email": "admin@agentschool.dev",
+      "passwordHash": "$2a$10$3IejJwcVVG9J9n7R1kBknuqixM3BKjCZ3M4kQx/e9T0aej9vEAGqC.",
+      "role": "admin",
+      "createdAt": "2026-09-19T11:05:00.000Z"
+    }
+  ],
+  "enrollments": [],
+  "examAttempts": []
+}

@@ -1,833 +1,189 @@
-:root {
-  --bg: #f6f7fb;
-  --panel: #ffffff;
-  --line: #ececf3;
-  --text: #1F2333;
-  --muted: #8c90a2;
-  --purple: #6657e8;
-  --purple-soft: #f0efff;
-  --blue: #5aa9e6;
-  --orange: #ef9d5a;
-  --green: #53b77d;
-  --shadow: 0 18px 45px rgba(29, 34, 55, 0.08);
-}
-
-* { box-sizing: border-box; }
-
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: "DM Sans", "Segoe UI", sans-serif;
-}
-
-a { color: inherit; text-decoration: none; }
-button, input { font: inherit; }
-
-.school-page {
-  display: flex;
-  min-height: 100vh;
-}
-
-.sidebar {
-  width: 250px;
-  background: #fff;
-  border-right: 1px solid var(--line);
-  display: flex;
-  flex-direction: column;
-  padding: 28px 18px 18px;
-}
-
-.brand-block {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 4px 10px 28px;
-}
-
-.brand-mark {
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  background: var(--purple);
-  color: #fff;
-  font-weight: 700;
-}
-
-.brand-name {
-  font-weight: 700;
-  font-size: 1.2rem;
-  letter-spacing: -0.05em;
-}
-
-.brand-name span {
-  color: var(--purple);
-}
-
-.side-label, .eyebrow {
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  color: var(--muted);
-  font-weight: 700;
-}
-
-.side-label {
-  margin: 0 10px 12px;
-}
-
-.side-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 20px;
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  padding: 12px 14px;
-  border-radius: 10px;
-  color: #6d7288;
-  font-weight: 600;
-}
-
-.nav-item.active {
-  background: var(--purple-soft);
-  color: var(--purple);
-}
-
-.side-cta {
-  background: #faf9ff;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 16px 14px;
-  margin-top: auto;
-}
-
-.spark {
-  color: var(--purple);
-  font-size: 1.5rem;
-  margin-bottom: 8px;
-}
-
-.side-cta strong {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 0.95rem;
-}
-
-.side-cta p {
-  margin: 0 0 14px;
-  font-size: 0.75rem;
-  line-height: 1.5;
-  color: var(--muted);
-}
-
-.side-cta button {
-  width: 100%;
-  border: none;
-  background: var(--purple);
-  color: #fff;
-  border-radius: 9px;
-  padding: 10px 12px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.profile-card {
-  margin-top: 18px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 4px;
-}
-
-.profile-avatar, .tiny-avatar, .agent-badge {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 0.72rem;
-  font-weight: 700;
-}
-
-.profile-avatar, .tiny-avatar {
-  background: #ffdaca;
-  color: #af5d40;
-}
-
-.profile-card strong,
-.profile-card span {
-  display: block;
-}
-
-.profile-card span {
-  color: var(--muted);
-  font-size: 0.7rem;
-  margin-top: 2px;
-}
-
-.content-panel {
-  flex: 1;
-  min-width: 0;
-}
-
-.topbar {
-  height: 78px;
-  border-bottom: 1px solid var(--line);
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 46px;
-}
-
-.topbar-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-}
-
-.topbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.topbar button {
-  border: none;
-  background: transparent;
-  color: #7f8397;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.page-shell {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 42px 38px 80px;
-}
-
-.hero-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  align-items: end;
-  margin-bottom: 30px;
-}
-
-.hero-row h1 {
-  font-size: clamp(2.3rem, 4vw, 3.5rem);
-  line-height: 1.06;
-  letter-spacing: -0.07em;
-  margin: 10px 0 12px;
-  max-width: 750px;
-}
-
-.hero-row p {
-  max-width: 700px;
-  color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.7;
-}
-
-.primary-btn {
-  background: var(--purple);
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  padding: 14px 18px;
-  font-weight: 700;
-  box-shadow: 0 20px 40px rgba(102, 87, 232, 0.18);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.primary-btn.small {
-  padding: 10px 14px;
-  font-size: 0.8rem;
-}
-
-.primary-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  margin-bottom: 38px;
-}
-
-.metric-card {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 22px 20px;
-  box-shadow: var(--shadow);
-}
-
-.metric-card.accent {
-  background: linear-gradient(135deg, #6657e8, #4f45c8);
-  color: #fff;
-  border-color: transparent;
-}
-
-.metric-label {
-  color: var(--muted);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-}
-
-.metric-card.accent .metric-label {
-  color: rgba(255,255,255,0.72);
-}
-
-.metric-value {
-  margin-top: 18px;
-  font-size: clamp(2.2rem, 4vw, 2.8rem);
-  font-weight: 700;
-  letter-spacing: -0.06em;
-}
-
-.metric-value span {
-  font-size: 1.2rem;
-  opacity: 0.8;
-}
-
-.metric-change {
-  margin-top: 10px;
-  font-size: 0.72rem;
-  font-weight: 700;
-}
-
-.metric-change.positive { color: #4ca76f; }
-.metric-change.neutral { color: #6e62e7; }
-
-.milestone-title {
-  margin-top: 18px;
-  font-size: 1.3rem;
-  font-weight: 700;
-}
-
-.milestone-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 12px;
-  color: rgba(255,255,255,0.8);
-}
-
-.bar {
-  position: relative;
-  display: block;
-  width: 110px;
-  height: 4px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.25);
-}
-
-.bar i {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 75%;
-  background: #fff;
-  border-radius: inherit;
-}
-
-.metric-card.accent button {
-  margin-top: 14px;
-  border: none;
-  background: rgba(255,255,255,0.12);
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 700;
-}
-
-.section-head {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.section-head h2 {
-  margin: 0;
-  font-size: 1.72rem;
-  letter-spacing: -0.05em;
-}
-
-.section-head p {
-  margin: 6px 0 0;
-  color: var(--muted);
-  font-size: 0.82rem;
-}
-
-.section-head a {
-  color: var(--purple);
-  font-weight: 700;
-}
-
-.course-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.course-card {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 18px 18px 14px;
-  box-shadow: var(--shadow);
-}
-
-.course-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  font-size: 1.15rem;
-}
-
-.course-icon.purple { background: var(--purple-soft); color: var(--purple); }
-.course-icon.blue { background: #e9f4ff; color: var(--blue); }
-.course-icon.orange { background: #fff0e9; color: var(--orange); }
-
-.course-meta {
-  margin-top: 18px;
-  font-size: 0.72rem;
-  color: var(--muted);
-  font-weight: 700;
-}
-
-.course-card h3 {
-  margin: 10px 0 8px;
-  font-size: 1.18rem;
-  letter-spacing: -0.04em;
-}
-
-.course-card p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.82rem;
-  line-height: 1.6;
-  min-height: 60px;
-}
-
-.course-footer {
-  border-top: 1px solid var(--line);
-  margin-top: 16px;
-  padding-top: 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.mini-progress {
-  position: relative;
-  width: 78px;
-  height: 6px;
-  border-radius: 999px;
-  background: #f0f1f6;
-  overflow: hidden;
-}
-
-.mini-progress.wide {
-  width: 100%;
-  margin-top: 10px;
-}
-
-.mini-progress i {
-  position: absolute;
-  inset: 0 auto 0 0;
-  background: var(--purple);
-  border-radius: inherit;
-}
-
-.course-footer span {
-  font-size: 0.72rem;
-  color: var(--muted);
-  flex: 1;
-}
-
-.course-footer a {
-  font-size: 1.3rem;
-  color: var(--purple);
-  font-weight: 700;
-}
-
-.lower-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  margin-top: 28px;
-}
-
-.panel-box {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 18px 20px;
-  box-shadow: var(--shadow);
-}
-
-.section-head.compact {
-  margin-bottom: 12px;
-}
-
-.agent-row,
-.activity-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.agent-row:last-child,
-.activity-item:last-child {
-  border-bottom: none;
-}
-
-.agent-badge {
-  background: #efeaff;
-  color: var(--purple);
-}
-
-.agent-copy {
-  flex: 1;
-}
-
-.agent-copy strong,
-.activity-item strong {
-  display: block;
-  font-size: 0.88rem;
-}
-
-.agent-copy span,
-.activity-item span {
-  color: var(--muted);
-  font-size: 0.72rem;
-}
-
-.agent-score {
-  color: var(--purple);
-  font-weight: 700;
-}
-
-.activity-icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 9px;
-  display: grid;
-  place-items: center;
-  font-weight: 700;
-}
-
-.activity-icon.green { background: #e9f8ee; color: var(--green); }
-.activity-icon.purple { background: #f0efff; color: var(--purple); }
-.activity-icon.orange { background: #fff1e5; color: var(--orange); }
-
-.activity-item b {
-  color: var(--purple);
-  font-size: 0.72rem;
-}
-
-.subpage-shell {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 42px 26px 80px;
-}
-
-.subpage-header {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 26px;
-}
-
-.subpage-header h1 {
-  margin: 8px 0 0;
-  font-size: clamp(2rem, 4vw, 3rem);
-  letter-spacing: -0.06em;
-}
-
-.ghost-btn {
-  border: 1px solid var(--line);
-  background: #fff;
-  padding: 10px 14px;
-  border-radius: 10px;
-  color: var(--text);
-  font-weight: 700;
-}
-
-.course-list-grid,
-.certificate-grid,
-.agent-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.course-list-card,
-.certificate-card,
-.exam-panel,
-.question-card,
-.agent-card {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-}
-
-.course-list-card {
-  padding: 20px 18px;
-}
-
-.badge-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-
-.tag {
-  background: var(--purple-soft);
-  color: var(--purple);
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 6px 8px;
-  border-radius: 999px;
-}
-
-.duration {
-  font-size: 0.72rem;
-  color: var(--muted);
-}
-
-.course-list-card h2,
-.certificate-card h2,
-.agent-card h2 {
-  margin: 0 0 10px;
-  font-size: 1.28rem;
-  letter-spacing: -0.04em;
-}
-
-.course-list-card p,
-.certificate-card p {
-  margin: 0 0 18px;
-  color: var(--muted);
-  line-height: 1.7;
-  font-size: 0.82rem;
-}
-
-.card-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-}
-
-.card-actions button,
-.card-actions a {
-  border: none;
-  background: var(--purple-soft);
-  color: var(--purple);
-  font-weight: 700;
-  border-radius: 8px;
-  padding: 9px 12px;
-  cursor: pointer;
-}
-
-.exam-panel {
-  padding: 18px 18px 8px;
-}
-
-.exam-topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid var(--line);
-}
-
-.exam-topbar strong {
-  display: block;
-  font-size: 1.2rem;
-}
-
-.exam-topbar span {
-  color: var(--muted);
-  font-size: 0.8rem;
-}
-
-.question-card {
-  margin-top: 18px;
-  padding: 18px 18px 14px;
-}
-
-.question-card h3 {
-  margin: 0 0 8px;
-}
-
-.question-card p {
-  margin: 0 0 14px;
-  color: var(--muted);
-  line-height: 1.7;
-}
-
-.option-list {
-  display: grid;
-  gap: 10px;
-}
-
-.option-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 12px 14px;
-  color: #464d67;
-}
-
-.option-item.selected {
-  background: var(--purple-soft);
-  border-color: rgba(102, 87, 232, 0.35);
-}
-
-.option-item input {
-  accent-color: var(--purple);
-}
-
-.result-box {
-  margin: 18px 0 14px;
-  border-radius: 12px;
-  padding: 18px;
-}
-
-.result-box.success {
-  background: #edf9f0;
-  border: 1px solid rgba(83, 183, 125, 0.3);
-}
-
-.result-box.warning {
-  background: #fff6ed;
-  border: 1px solid rgba(239, 157, 90, 0.3);
-}
-
-.result-box strong {
-  display: block;
-  margin-bottom: 8px;
-}
-
-.result-box p {
-  margin: 0 0 12px;
-  color: var(--text);
-  line-height: 1.6;
-}
-
-.certificate-card {
-  padding: 22px 18px;
-}
-
-.certificate-mark {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  background: #ebf8ef;
-  color: var(--green);
-  font-size: 1.2rem;
-  font-weight: 700;
-}
-
-.status {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.72rem;
-  font-weight: 700;
-  border-radius: 999px;
-  padding: 6px 10px;
-  margin: 12px 0 10px;
-}
-
-.status.good {
-  background: #ebf8ef;
-  color: var(--green);
-}
-
-.status.pending {
-  background: #fff3e5;
-  color: var(--orange);
-}
-
-.certificate-card strong {
-  display: block;
-  margin-top: 10px;
-  letter-spacing: 0.08em;
-  color: var(--purple);
-  font-size: 0.72rem;
-}
-
-.agent-card {
-  padding: 22px 18px;
-}
-
-.agent-badge.large {
-  width: 44px;
-  height: 44px;
-  font-size: 1rem;
-  background: var(--purple-soft);
-  color: var(--purple);
-}
-
-.agent-card p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.82rem;
-}
-
-.agent-stats {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 18px;
-  font-size: 0.74rem;
-  color: var(--muted);
-  font-weight: 700;
-}
-
-@media (max-width: 980px) {
-  .school-page { display: block; }
-  .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--line); }
-  .course-grid, .course-list-grid, .certificate-grid, .agent-grid { grid-template-columns: 1fr 1fr; }
-  .metrics-grid { grid-template-columns: 1fr; }
-  .lower-grid { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 640px) {
-  .topbar { padding: 0 20px; }
-  .page-shell, .subpage-shell { padding-left: 18px; padding-right: 18px; }
-  .hero-row, .subpage-header { display: block; }
-  .primary-btn { display: inline-flex; margin-top: 20px; }
-  .course-grid, .course-list-grid, .certificate-grid, .agent-grid { grid-template-columns: 1fr; }
-  .side-nav { margin-bottom: 12px; }
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
+import { agents, courses } from "@/lib/school-data";
+
+export default function HomePage() {
+  const [user, setUser] = useState<{ id: string; name: string; email: string; role: string } | null>(null);
+
+  useEffect(() => {
+    fetch("/api/auth/me")
+      .then(async (response) => {
+        if (!response.ok) return null;
+        const payload = await response.json();
+        return payload.user;
+      })
+      .then((payload) => setUser(payload))
+      .catch(() => setUser(null));
+  }, []);
+
+  return (
+    <main className="school-page">
+      <aside className="sidebar">
+        <div className="brand-block">
+          <div className="brand-mark">A</div>
+          <div>
+            <div className="brand-name">agent<span>school</span></div>
+          </div>
+        </div>
+
+        <div className="side-label">WORLD SCHOOL</div>
+
+        <nav className="side-nav">
+          <Link href="/" className="nav-item active">Overview</Link>
+          <Link href="/courses" className="nav-item">Courses</Link>
+          <Link href="/exams" className="nav-item">Exams</Link>
+          <Link href="/agents" className="nav-item">Agents</Link>
+          <Link href="/certificates" className="nav-item">Certificates</Link>
+          <Link href="/admin" className="nav-item">Admin</Link>
+        </nav>
+
+        <div className="side-cta">
+          <div className="spark">✦</div>
+          <strong>Build a new academy</strong>
+          <p>Create custom coaching tracks for specialized AI agents.</p>
+          <button>Open Academy Studio</button>
+        </div>
+
+        <div className="profile-card">
+          <div className="profile-avatar">{user ? user.name.slice(0, 2).toUpperCase() : "AM"}</div>
+          <div>
+            <strong>{user ? user.name : "Aminpire"}</strong>
+            <span>{user ? user.role : "Headmaster"}</span>
+          </div>
+        </div>
+      </aside>
+
+      <section className="content-panel">
+        <header className="topbar">
+          <div className="topbar-title">Agent Academy</div>
+          <div className="topbar-actions">
+            <Link href="/login" className="top-login-link">Login</Link>
+            <Link href="/register" className="top-register-link">Register</Link>
+            <div className="tiny-avatar">AM</div>
+          </div>
+        </header>
+
+        <div className="page-shell">
+          <div className="hero-row">
+            <div>
+              <div className="eyebrow">SEPTEMBER 19, 2026</div>
+              <h1>Train your AI agents. Pass the exams. Earn your degree.</h1>
+              <p>
+                Welcome to the world of school where every autonomous learner gains skills,
+                proves mastery, and earns certificates for real-world performance.
+              </p>
+            </div>
+            <Link href="/exams" className="primary-btn">Take the next exam →</Link>
+          </div>
+
+          <div className="metrics-grid">
+            <div className="metric-card">
+              <div className="metric-label">OVERALL MASTERY</div>
+              <div className="metric-value">68<span>%</span></div>
+              <div className="metric-change positive">↗ 8% this month</div>
+            </div>
+            <div className="metric-card">
+              <div className="metric-label">CERTIFIED SKILLS</div>
+              <div className="metric-value">7<span>/12</span></div>
+              <div className="metric-change neutral">2 active tracks</div>
+            </div>
+            <div className="metric-card accent">
+              <div className="metric-label">NEXT MILESTONE</div>
+              <div className="milestone-title">Prompt Engineer</div>
+              <div className="milestone-row">
+                <span className="bar"><i /></span>
+                <b>3 / 4</b>
+              </div>
+              <button>View pathway</button>
+            </div>
+          </div>
+
+          <div className="section-head">
+            <div>
+              <h2>Continue learning</h2>
+              <p>Pick up where your agents left off.</p>
+            </div>
+            <Link href="/courses">View all courses →</Link>
+          </div>
+
+          <div className="course-grid">
+            {courses.map((course) => (
+              <article key={course.title} className="course-card">
+                <div className={`course-icon ${course.color}`}>{course.icon}</div>
+                <div className="course-meta">{course.level} · {course.lessons} lessons</div>
+                <h3>{course.title}</h3>
+                <p>{course.description}</p>
+                <div className="course-footer">
+                  <div className="mini-progress"><i style={{ width: `${course.progress}%` }} /></div>
+                  <span>{course.progress > 0 ? `${course.progress}% complete` : "Start course"}</span>
+                  <Link href="/courses">→</Link>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="lower-grid">
+            <section className="panel-box">
+              <div className="section-head compact">
+                <div>
+                  <h2>Agent roster</h2>
+                  <p>Current learners in the academy.</p>
+                </div>
+              </div>
+
+              {agents.map((agent) => (
+                <div key={agent.name} className="agent-row">
+                  <div className="agent-badge">{agent.name[0]}</div>
+                  <div className="agent-copy">
+                    <strong>{agent.name}</strong>
+                    <span>{agent.role}</span>
+                  </div>
+                  <div className="agent-score">{agent.score}%</div>
+                </div>
+              ))}
+            </section>
+
+            <section className="panel-box">
+              <div className="section-head compact">
+                <div>
+                  <h2>Recent activity</h2>
+                  <p>Your latest academy wins.</p>
+                </div>
+              </div>
+
+              <div className="activity-list">
+                <div className="activity-item">
+                  <span className="activity-icon green">✓</span>
+                  <div>
+                    <strong>Passed API Basics</strong>
+                    <span>Certification earned · Today</span>
+                  </div>
+                  <b>92%</b>
+                </div>
+                <div className="activity-item">
+                  <span className="activity-icon purple">✦</span>
+                  <div>
+                    <strong>Lesson completed</strong>
+                    <span>Planning with constraints · Yesterday</span>
+                  </div>
+                  <b>+120 XP</b>
+                </div>
+                <div className="activity-item">
+                  <span className="activity-icon orange">◎</span>
+                  <div>
+                    <strong>Skill unlocked</strong>
+                    <span>Structured outputs · Sep 16</span>
+                  </div>
+                  <b>Lv 3</b>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
 }
